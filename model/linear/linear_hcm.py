@@ -7,8 +7,7 @@ from mlxtend.evaluate import bias_variance_decomp
 import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 
-features = ['city_target_encoder',\
-        'city_index',\
+features = ['district_encoder',\
         'area',\
         'new_num_floors',\
         'new_bedrooms',\
@@ -18,7 +17,7 @@ features = ['city_target_encoder',\
         'houseTypes_Bán Nhà mặt phố',\
         'houseTypes_Bán Nhà riêng']
 
-df = pd.read_excel('final_data.xlsx')
+df = pd.read_excel('HCM_data.xlsx')
 df_tranform = pd.DataFrame(data = StandardScaler().fit_transform(df.loc[:, features].values), columns = features)
 
 class splitData():
@@ -90,4 +89,4 @@ if __name__ =="__main__":
     
     
     
-# python model/linear/linear.py
+# python model/linear/linear_hcm.py
