@@ -1,12 +1,11 @@
-import keras 
-import torch
-import pandas as pd
-from torch import nn 
+
+import pandas as pd 
 import numpy as np
 from sklearn.linear_model import LinearRegression
 from sklearn.model_selection import train_test_split
 from mlxtend.evaluate import bias_variance_decomp
 import matplotlib.pyplot as plt
+from sklearn.preprocessing import StandardScaler
 
 features = ['city_target_encoder',\
         'city_index',\
@@ -20,6 +19,7 @@ features = ['city_target_encoder',\
         'houseTypes_Bán Nhà riêng']
 
 df = pd.read_excel('final_data.xlsx')
+df_tranform = pd.DataFrame(data = StandardScaler().fit_transform(df.loc[:, features].values), columns = features)
 
 class splitData():
     def __init__(self):
@@ -50,7 +50,7 @@ class LinearModel():
 if __name__ =="__main__":
     linear_model = LinearModel()
     y = df['price'].values
-    x = df[features].values
+    x = df_tranform[features].values
     data = splitData()
     data.split(x, y)
     linear_model._X = data.x_train
@@ -60,10 +60,9 @@ if __name__ =="__main__":
     mse, bias, var = bias_variance_decomp(linear_model.model, data.x_train, data.y_train, data.x_test, data.y_test, loss='mse', num_rounds=200, random_seed=1)
     print("MSE:", mse , '\n','Bias:', bias, '\n', 'variance:', var)
     
-    plt.plot(df_predict['predict'].values)
-    plt.plot( df_predict['real'].values)
-    plt.plot(df_predict['error'].values)
+    plt.hist(df_predict['predict'].values)
+    plt.hist(df_predict['real'].values)
+    plt.hist(df_predict['error'].values)
     
-    plt.show()
     
 # python3 model/linear/linear.py
