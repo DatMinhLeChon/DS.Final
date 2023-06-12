@@ -60,9 +60,7 @@ if __name__ =="__main__":
     mse, bias, var = bias_variance_decomp(linear_model.model, data.x_train, data.y_train, data.x_test, data.y_test, loss='mse', num_rounds=200, random_seed=1)
     print("MSE:", mse , '\n','Bias:', bias, '\n', 'variance:', var)
     
-    plt.hist(df_predict['predict'].values)
-    plt.hist(df_predict['real'].values)
-    plt.hist(df_predict['error'].values)
+    df_predict.hist()
     
     
-# python3 model/linear/linear.py
+# python model/linear/linear.py
