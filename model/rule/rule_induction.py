@@ -30,7 +30,11 @@ data = splitData()
 data.split(x, y)
 
 
-model = DecisionTreeRegressor()
-model.fit(data.X_train, data.y_train)
-
+y_pred = model.predict(data.X_test)
+mse = mean_squared_error(data.y_test, y_pred)
+mae = mean_absolute_error(data.y_test, y_pred)
+evs = explained_variance_score(data.y_test, y_pred)
+print("MSE: ", mse)
+print("MAE: ", mae)
+print("variance: ", evs)
 
