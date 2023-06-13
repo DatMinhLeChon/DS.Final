@@ -87,6 +87,8 @@ if __name__ =="__main__":
     ridge_model.linear()
     ridge_model.predict()
     
+    print(linear_model.model.coef_)
+    
     
     
     
